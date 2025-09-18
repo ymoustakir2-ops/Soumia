@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تلاوة سورة الفاتحة - محمد العجمي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a5e63 0%, #0d3235 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #f8f8f8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .surah-name {
+            font-size: 2.2rem;
+            color: #4db8ff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .reciter {
+            font-size: 1.4rem;
+            color: #ffce54;
+            margin-bottom: 20px;
+        }
+        
+        .player {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .play-btn {
+            background: #4db8ff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(77, 184, 255, 0.4);
+        }
+        
+        .play-btn:hover {
+            background: #2aa1f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(77, 184, 255, 0.6);
+        }
+        
+        .play-btn:active {
+            transform: translateY(0);
+        }
+        
+        .play-btn i {
+            margin-left: 10px;
+        }
+        
+        .verse {
+            font-size: 1.8rem;
+            line-height: 2.5;
+            margin: 25px 0;
+            color: #f1f1f1;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .translation {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 40px;
+            line-height: 1.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .surah-name { font-size: 1.8rem; }
+            .reciter { font-size: 1.2rem; }
+            .verse { font-size: 1.6rem; }
+            .play-btn { padding: 12px 25px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>مشغل القرآن الكريم</h1>
+            <div class="surah-name">سورة الفاتحة</div>
+            <div class="reciter">القارئ محمد العجمي</div>
+        </header>
+        
+        <div class="player">
+            <button class="play-btn" id="playButton">
+                <i class="fas fa-play"></i> تشغيل السورة
+            </button>
+            <audio id="audioPlayer"></audio>
+            
+            <div class="controls">
+                <button class="control-btn" id="restartButton" title="إعادة التشغيل">
+                    <i class="fas fa-redo"></i>
+                </button>
+                <button class="control-btn" id="volumeButton" title="تحكم في الصوت">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="verse">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </div>
+        
+        <div class="translation">
+            <p>ترجمة المعاني: بسم الله الرحمن الرحيم - بدأت باسم الله الذي هو رحمن رحيم. الذي له الرحمة الشاملة لجميع الخلق، والرحمة الخاصة للمؤمنين.</p>
+        </div>
+        
+        <div class="footer">
+            <p>يمكنك الضغط على زر التشغيل لسماع تلاوة سورة الفاتحة بصوت القارئ محمد العجمي</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const playButton = document.getElementById('playButton');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const restartButton = document.getElementById('restartButton');
+            const volumeButton = document.getElementById('volumeButton');
+            
+            // رابط تلاوة سورة الفاتحة بصوت محمد العجمي
+            audioPlayer.src = "https://download.quranicaudio.com/quran/muhammad_al_ajamy/001.mp3";
+            
+            playButton.addEventListener('click', function() {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i> إيقاف مؤقت';
+                    playButton.classList.add('playing');
+                } else {
+                    audioPlayer.pause();
+                    playButton.innerHTML = '<i class="fas fa-play"></i> تشغيل السورة';
+                    playButton.classList.remove('playing');
+                }
+            });
+            
+            restartButton.addEventListener('click', function() {
+                audioPlayer.currentTime = 0;
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i> إيقاف مؤقت';
+                    playButton.classList.add('playing');
+                }
+            });
+            
+            volumeButton.addEventListener('click', function() {
+                if (audioPlayer.muted) {
+                    audioPlayer.muted = false;
+                    volumeButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    volumeButton.title = "كتم الصوت";
+                } else {
+                    audioPlayer.muted = true;
+                    volumeButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    volumeButton.title = "إعادة الصوت";
+                }
+            });
+            
+            audioPlayer.addEventListener('ended', function() {
+                playButton.innerHTML = '<i class="fas fa-play"></i> تشغيل السورة';
+                playButton.classList.remove('playing');
+            });
+            
+            audioPlayer.addEventListener('timeupdate', function() {
+                const currentTime = audioPlayer.currentTime;
+                const duration = audioPlayer.duration;
+                
+                if (duration > 0) {
+                    const progressPercent = (currentTime / duration) * 100;
+                    playButton.style.background = `linear-gradient(90deg, #2aa1f0 ${progressPercent}%, #4db8ff ${progressPercent}%)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
