@@ -12,7 +12,8 @@
 ---
 📖 سورة الفاتحة
 
-<audio controls autoplay>
+```html
+<audio controls>
   <source src="https://server6.mp3quran.net/ajm/001.mp3" type="audio/mpeg">
   المتصفح لا يدعم تشغيل الصوت.
 </audio>
